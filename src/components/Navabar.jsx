@@ -24,14 +24,14 @@ const Navbar = () => {
         : "bg-transparent"
     }`}>
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">LB</h2>
+        <h2 className="text-2xl font-bold bg-linear-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">LB</h2>
         
         <div className="flex gap-8">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              className="text-slate-300 hover:text-white transition duration-300 font-medium hover:text-transparent hover:bg-gradient-to-r hover:from-purple-400 hover:to-cyan-400 hover:bg-clip-text"
+              className="text-slate-300 hover:text-transparent transition duration-300 font-medium hover:bg-linear-to-r hover:from-purple-400 hover:to-cyan-400 hover:bg-clip-text"
             >
               {link.name}
             </a>

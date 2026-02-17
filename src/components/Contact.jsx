@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import emailjs from "@emailjs/browser";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -8,6 +9,13 @@ const Contact = () => {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  // Initialize EmailJS on component mount
+  useEffect(() => {
+    emailjs.init("JTZKA13zDXGBOUQil"); // Replace with your public key from EmailJS
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,16 +23,39 @@ const Contact = () => {
       ...prev,
       [name]: value
     }));
+    setError(""); // Clear error on input change
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    setSubmitted(true);
-    setTimeout(() => {
+    setLoading(true);
+    setError("");
+
+    try {
+      const result = await emailjs.send(
+        "service_7px0r2l", // Replace with your service ID
+        "template_9w5t6rq", // Replace with your template ID
+        {
+          to_email: "lakshikabourai@gmail.com", // Your email
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+        }
+      );
+
+      console.log("Email sent successfully:", result);
+      setSubmitted(true);
       setFormData({ name: "", email: "", message: "" });
-      setSubmitted(false);
-    }, 3000);
+      
+      setTimeout(() => {
+        setSubmitted(false);
+      }, 5000);
+    } catch (err) {
+      console.error("Email send failed:", err);
+      setError("Failed to send message. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const contactMethods = [
@@ -99,10 +130,17 @@ const Contact = () => {
 
               <button
                 type="submit"
-                className="w-full bg-linear-to-r from-purple-500 to-cyan-500 hover:shadow-lg hover:shadow-purple-500/30 text-white font-bold py-3 rounded-lg transition duration-300 transform hover:scale-105"
+                disabled={loading}
+                className="w-full bg-linear-to-r from-purple-500 to-cyan-500 hover:shadow-lg hover:shadow-purple-500/30 text-white font-bold py-3 rounded-lg transition duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Message
+                {loading ? "Sending..." : "Send Message"}
               </button>
+
+              {error && (
+                <div className="bg-red-500/20 border border-red-500/50 text-red-300 py-3 px-4 rounded-lg text-center">
+                  ✗ {error}
+                </div>
+              )}
 
               {submitted && (
                 <div className="bg-green-500/20 border border-green-500/50 text-green-300 py-3 px-4 rounded-lg text-center">

@@ -26,7 +26,7 @@ const Skills = () => {
     <section id="skills" className="py-20 text-white">
       <div className="max-w-6xl mx-auto px-6">
         <h2 className="text-5xl font-bold text-center mb-16">
-          Technical <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">Skills</span>
+          Technical <span className="bg-linear-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">Skills</span>
         </h2>
 
         <div className="grid md:grid-cols-2 gap-8">
@@ -37,7 +37,7 @@ const Skills = () => {
             >
               <div className="flex items-center gap-3 mb-6">
                 <span className="text-3xl">{category.icon}</span>
-                <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">{category.category}</h3>
+                <h3 className="text-2xl font-bold bg-linear-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">{category.category}</h3>
               </div>
               
               <div className="flex flex-wrap gap-3">
@@ -54,8 +54,8 @@ const Skills = () => {
           ))}
         </div>
 
-        <div className="mt-16 bg-gradient-to-r from-purple-500/10 to-cyan-500/10 backdrop-blur-xl p-8 rounded-2xl border border-slate-600/30">
-          <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">Soft Skills</h3>
+        <div className="mt-16 bg-linear-to-r from-purple-500/10 to-cyan-500/10 backdrop-blur-xl p-8 rounded-2xl border border-slate-600/30">
+          <h3 className="text-2xl font-bold mb-4 bg-linear-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">Soft Skills</h3>
           <div className="grid md:grid-cols-3 gap-6">
             <div>
               <h4 className="font-bold mb-2 text-white">Leadership</h4>
